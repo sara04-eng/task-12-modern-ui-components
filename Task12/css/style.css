@@ -1,0 +1,819 @@
+/* ==========================================================================
+   THE COMPONENT CATALOG — stylesheet
+   Design tokens live on :root. Every specimen below is an original design,
+   built for its own logic rather than copied from any single reference.
+   ========================================================================== */
+
+:root{
+  /* --- palette -------------------------------------------------------- */
+  --ink:        #12151c;   /* primary background, deep slate-navy */
+  --panel:      #1b202b;   /* secondary background, panels & frames */
+  --panel-2:    #232a37;   /* raised panel / hover surface */
+  --line:       #2c3342;   /* hairline borders */
+  --paper:      #ece9e1;   /* primary text, warm off-white */
+  --muted:      #8b909f;   /* secondary text */
+  --amber:      #e8a33d;   /* primary accent */
+  --amber-dim:  #6b5227;
+  --teal:       #5fb3a3;   /* secondary accent */
+
+  /* --- type ------------------------------------------------------------ */
+  --f-display: 'Fraunces', serif;
+  --f-body:    'Inter', sans-serif;
+  --f-mono:    'IBM Plex Mono', monospace;
+
+  /* --- layout ------------------------------------------------------------ */
+  --rail-w: 15rem;
+  --rail-w-collapsed: 0rem;
+  --radius: 1rem;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img{ max-width: 100%; display: block; }
+a{ color: inherit; text-decoration: none; }
+ul{ list-style: none; margin: 0; padding: 0; }
+h1,h2,h3{ font-family: var(--f-display); margin: 0; font-weight: 600; }
+p{ margin: 0; }
+
+body::-webkit-scrollbar{ width: .5rem; }
+body::-webkit-scrollbar-track{ background: var(--ink); }
+body::-webkit-scrollbar-thumb{ background: var(--line); border-radius: 1rem; }
+
+/* ==========================================================================
+   INDEX RAIL — signature navigation element
+   ========================================================================== */
+
+.index-rail{
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--rail-w);
+  height: 100vh;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.25rem;
+  z-index: 100;
+}
+
+.index-rail__mark{
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: 2.5rem;
+  font-family: var(--f-mono);
+  font-size: .95rem;
+  letter-spacing: .04em;
+  color: var(--paper);
+}
+.index-rail__mark-dot{
+  width: .55rem; height: .55rem;
+  border-radius: 50%;
+  background: var(--amber);
+  flex: none;
+}
+.index-rail__mark-text em{
+  color: var(--amber);
+  font-style: normal;
+}
+
+.index-rail__list{ display: flex; flex-direction: column; gap: .15rem; }
+.index-rail__list a{
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  padding: .55rem .5rem;
+  border-radius: .5rem;
+  color: var(--muted);
+  transition: color .2s ease, background .2s ease;
+}
+.index-rail__list a:hover{ color: var(--paper); background: var(--panel-2); }
+.index-rail__list a.is-current{ color: var(--amber); background: var(--panel-2); }
+
+.index-rail__num{
+  font-family: var(--f-mono);
+  font-size: .75rem;
+  color: var(--muted);
+  min-width: 1.4rem;
+}
+.index-rail__list a.is-current .index-rail__num,
+.index-rail__list a:hover .index-rail__num{ color: var(--amber); }
+
+.index-rail__label{ font-size: .9rem; font-weight: 500; }
+
+.index-rail__toggle{
+  display: none;
+}
+
+/* ==========================================================================
+   MAIN / CATALOG LAYOUT
+   ========================================================================== */
+
+.catalog{
+  margin-left: var(--rail-w);
+  max-width: 62rem;
+  padding: 0 3rem 6rem;
+}
+
+/* --- cover -------------------------------------------------------------- */
+
+.cover{
+  padding: 6rem 0 4rem;
+  border-bottom: 1px solid var(--line);
+}
+.cover__eyebrow{
+  font-family: var(--f-mono);
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin: 0 0 1.25rem;
+}
+.cover__title{
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.cover__title em{ font-style: italic; color: var(--teal); font-weight: 500; }
+.cover__intro{
+  max-width: 38rem;
+  margin: 1.75rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.cover__meta{
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  font-family: var(--f-mono);
+  font-size: .78rem;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+.cover__meta span{ padding-left: 1.5rem; position: relative; }
+.cover__meta span:first-child{ padding-left: 0; }
+.cover__meta span:not(:first-child)::before{
+  content: "";
+  position: absolute; left: 0; top: 50%;
+  width: .3rem; height: 1px;
+  background: var(--line);
+  transform: translateY(-50%);
+}
+
+/* --- specimen shell ------------------------------------------------------ */
+
+.specimen{
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 2rem;
+}
+.specimen--footer{ border-bottom: none; padding-bottom: 0; }
+.specimen--footer > .specimen{ border-bottom: 1px solid var(--line); }
+.specimen--footer > .specimen:last-of-type{ border-bottom: 1px solid var(--line); }
+
+.specimen__label{
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+.specimen__num{
+  font-family: var(--f-mono);
+  font-size: .8rem;
+  color: var(--amber);
+  border: 1px solid var(--amber-dim);
+  border-radius: .35rem;
+  padding: .2rem .5rem;
+  flex: none;
+  margin-top: .2rem;
+}
+.specimen__title{ font-size: 1.6rem; margin-bottom: .4rem; }
+.specimen__caption{ color: var(--muted); max-width: 34rem; font-size: .95rem; }
+
+.specimen__frame{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  overflow: hidden;
+  position: relative;
+}
+.specimen__frame--tall{ padding: 0; }
+
+/* ==========================================================================
+   SPEC 01 — Bar Nav (sliding pill)
+   ========================================================================== */
+
+.demo-navA{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 3rem;
+  padding: .6rem .6rem .6rem 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.demo-navA__brand{
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.demo-navA__brand em{ color: var(--amber); font-style: normal; }
+
+.demo-navA__links{
+  display: flex;
+  gap: .25rem;
+  position: relative;
+  background: var(--panel-2);
+  border-radius: 2.5rem;
+  padding: .3rem;
+}
+.demo-navA__links a{
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding: .55rem 1.2rem;
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color .25s ease;
+  border-radius: 2rem;
+}
+.demo-navA__links a.is-active,
+.demo-navA__links a:hover{ color: var(--ink); }
+
+.demo-navA__pill{
+  position: absolute;
+  height: calc(100% - .6rem);
+  top: .3rem;
+  background: var(--amber);
+  border-radius: 2rem;
+  transition: left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1);
+  z-index: 1;
+}
+
+.demo-navA__burger{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: .3rem;
+  width: 2.2rem; height: 2.2rem;
+  background: var(--panel-2);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+}
+.demo-navA__burger span{
+  width: 1rem; height: 2px;
+  background: var(--paper);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+@media (max-width: 640px){
+  .demo-navA{ border-radius: 1.25rem; }
+  .demo-navA__burger{ display: flex; }
+  .demo-navA__links{
+    position: absolute;
+    top: calc(100% + .6rem);
+    left: 0; right: 0;
+    flex-direction: column;
+    background: var(--panel-2);
+    border-radius: 1rem;
+    padding: .5rem;
+    display: none;
+  }
+  .demo-navA__links.is-open{ display: flex; }
+  .demo-navA__pill{ display: none; }
+  .demo-navA__links a.is-active, .demo-navA__links a:hover{ color: var(--ink); background: var(--amber); }
+}
+
+/* ==========================================================================
+   SPEC 02 — Rail Nav (expanding vertical icon rail)
+   ========================================================================== */
+
+.demo-navB-stage{
+  position: relative;
+  min-height: 24rem;
+  background:
+    radial-gradient(circle at 75% 30%, rgba(95,179,163,.12), transparent 55%),
+    var(--ink);
+  display: flex;
+  align-items: center;
+}
+.demo-navB-stage__hint{
+  margin-left: 6.5rem;
+  font-family: var(--f-mono);
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+.demo-navB{
+  position: absolute;
+  top: 1.25rem; bottom: 1.25rem; left: 1.25rem;
+  width: 4.5rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  padding: 1.1rem .75rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width .4s cubic-bezier(.65,0,.35,1);
+}
+.demo-navB:hover{ width: 12rem; }
+
+.demo-navB__mark{
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: var(--amber);
+  font-family: var(--f-mono);
+  font-size: .95rem;
+  padding: 0 .35rem .3rem;
+  margin-bottom: 1rem;
+  white-space: nowrap;
+}
+.demo-navB__mark i{ font-size: 1.1rem; }
+.demo-navB__mark span{ opacity: 0; transition: opacity .25s ease .1s; }
+.demo-navB:hover .demo-navB__mark span{ opacity: 1; }
+
+.demo-navB__list{ display: flex; flex-direction: column; gap: .3rem; }
+.demo-navB__list a{
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: .65rem .35rem;
+  border-radius: .7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: background .2s ease, color .2s ease;
+}
+.demo-navB__list a i{ width: 1.4rem; text-align: center; font-size: 1rem; flex: none; }
+.demo-navB__list a span{ opacity: 0; transition: opacity .2s ease .1s; font-size: .88rem; font-weight: 500; }
+.demo-navB:hover .demo-navB__list a span{ opacity: 1; }
+.demo-navB__list a:hover, .demo-navB__list a.is-active{ background: var(--panel-2); color: var(--paper); }
+.demo-navB__list a.is-active{ color: var(--amber); }
+
+@media (max-width: 640px){
+  .demo-navB-stage{ min-height: 20rem; }
+  .demo-navB-stage__hint{ margin-left: 5.5rem; font-size: .72rem; }
+  .demo-navB:hover{ width: 10rem; }
+}
+
+/* ==========================================================================
+   SPEC 03 — Float Nav (glass split bar, shrinks on scroll)
+   ========================================================================== */
+
+.demo-navC-stage{
+  position: relative;
+  height: 22rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, rgba(232,163,61,.08), transparent 40%),
+    var(--ink);
+  scrollbar-width: thin;
+}
+.demo-navC-stage__hint{
+  position: absolute;
+  top: 6rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--f-mono);
+  font-size: .8rem;
+  color: var(--muted);
+}
+.demo-navC-stage__spacer{ height: 45rem; }
+
+.demo-navC{
+  position: sticky;
+  top: 1rem;
+  margin: 1rem auto 0;
+  width: min(90%, 26rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(27,32,43,.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: 3rem;
+  padding: .7rem 1.1rem;
+  transition: padding .3s ease, width .3s ease, background .3s ease;
+  z-index: 5;
+}
+.demo-navC.is-shrunk{
+  padding: .4rem .9rem;
+  width: min(80%, 20rem);
+  background: rgba(18,21,28,.85);
+}
+
+.demo-navC__side{ display: flex; gap: 1rem; }
+.demo-navC__side a{
+  font-size: .8rem;
+  color: var(--muted);
+  font-weight: 500;
+  transition: color .2s ease;
+}
+.demo-navC__side a:hover{ color: var(--paper); }
+.demo-navC__mark{
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--teal);
+}
+.demo-navC__cta{
+  color: var(--ink) !important;
+  background: var(--amber);
+  padding: .4rem .9rem;
+  border-radius: 2rem;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 640px){
+  .demo-navC__side:first-child li:first-child{ display: none; }
+}
+
+/* ==========================================================================
+   SPEC 04 — Gradient Frames
+   ========================================================================== */
+
+.gradient-frames{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1.5rem;
+}
+.gframe{
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 2px;
+  overflow: hidden;
+}
+.gframe::before{
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(from 0deg, var(--amber), transparent 30%, transparent 70%, var(--amber));
+  animation: spin 6s linear infinite;
+}
+.gframe--teal::before{
+  background: conic-gradient(from 0deg, var(--teal), transparent 30%, transparent 70%, var(--teal));
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+.gframe__inner{
+  position: relative;
+  z-index: 1;
+  background: var(--panel);
+  border-radius: calc(1.25rem - 2px);
+  padding: 1.75rem 1.5rem;
+  height: 100%;
+}
+.gframe__inner i{ font-size: 1.4rem; color: var(--amber); }
+.gframe--teal .gframe__inner i{ color: var(--teal); }
+.gframe__inner h3{ font-size: 1.1rem; margin: .9rem 0 .5rem; }
+.gframe__inner p{ color: var(--muted); font-size: .88rem; }
+
+@media (prefers-reduced-motion: reduce){
+  .gframe::before{ animation: none; }
+}
+
+/* ==========================================================================
+   SPEC 05 — Lift & Glow cards
+   ========================================================================== */
+
+.glow-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1.5rem;
+}
+.glow-card{
+  position: relative;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.2,.9,.3,1.2), border-color .3s ease;
+}
+.glow-card:hover{ transform: translateY(-.4rem); border-color: var(--amber-dim); }
+.glow-card__spot{
+  position: absolute;
+  width: 14rem; height: 14rem;
+  left: var(--x, 50%); top: var(--y, 0%);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(232,163,61,.18), transparent 70%);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.glow-card:hover .glow-card__spot{ opacity: 1; }
+.glow-card__index{
+  font-family: var(--f-mono);
+  font-size: .8rem;
+  color: var(--amber);
+  border: 1px solid var(--amber-dim);
+  width: 1.8rem; height: 1.8rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  position: relative; z-index: 1;
+}
+.glow-card h3{ font-size: 1.15rem; margin-bottom: .5rem; position: relative; z-index: 1; }
+.glow-card p{ color: var(--muted); font-size: .88rem; position: relative; z-index: 1; }
+.glow-card__go{
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-top: 1.25rem;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--paper);
+  position: relative; z-index: 1;
+}
+.glow-card__go i{ transition: transform .25s ease; font-size: .75rem; }
+.glow-card:hover .glow-card__go i{ transform: translateX(.3rem); }
+
+/* ==========================================================================
+   SPEC 06 — Reveal Panel cards
+   ========================================================================== */
+
+.reveal-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1.5rem;
+}
+.reveal-card{
+  position: relative;
+  height: 14rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--panel-2), var(--ink));
+  border: 1px solid var(--line);
+}
+.reveal-card__top{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reveal-card__top i{ font-size: 2.4rem; color: var(--teal); transition: transform .4s ease, opacity .4s ease; }
+.reveal-card:hover .reveal-card__top i{ transform: translateY(-1.2rem) scale(.85); opacity: .5; }
+
+.reveal-card__panel{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  transform: translateY(100%);
+  background: var(--panel);
+  border-top: 1px solid var(--teal);
+  padding: 1.25rem 1.4rem;
+  transition: transform .4s cubic-bezier(.65,0,.35,1);
+}
+.reveal-card:hover .reveal-card__panel{ transform: translateY(0); }
+.reveal-card__panel h3{ font-size: 1.05rem; margin-bottom: .35rem; }
+.reveal-card__panel p{ font-size: .82rem; color: var(--muted); }
+
+/* ==========================================================================
+   SPEC 07 — Wipe Icons
+   ========================================================================== */
+
+.wipe-icons{
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* ===== Card layout (icon + label under it) ===== */
+.wipe-icons a{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+
+  width: 3.6rem;
+  text-decoration: none;
+
+  color: var(--paper);
+}
+
+/* ===== Icon circle ===== */
+.wipe-icons a i{
+  width: 3.2rem;
+  height: 3.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 1px solid var(--line);
+
+  font-size: 1.1rem;
+
+  position: relative;
+  overflow: hidden;
+
+  z-index: 1;
+}
+
+.wipe-icons{
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+ 
+/* Card layout: icon circle + label underneath (same structure as Rise Icons) */
+.wipe-icons a{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  width: 3.6rem;
+  text-decoration: none;
+}
+ 
+/* Icon circle. NOTE: Font Awesome renders the glyph itself using ::before
+   on this <i> element, so the wipe-fill below MUST use ::after instead —
+   using ::before here would overwrite Font Awesome's own glyph and the
+   icon would disappear. */
+.wipe-icons a i{
+  position: relative;
+  width: 3.2rem; height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  font-size: 1.1rem;
+  color: var(--paper);
+  overflow: hidden;
+  isolation: isolate; /* keeps the z-index: -1 fill contained to this circle */
+}
+.wipe-icons a i::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--amber), var(--teal));
+  transform: translate(-120%, 120%) rotate(20deg);
+  transition: transform .4s cubic-bezier(.65,0,.35,1);
+  z-index: -1;
+}
+.wipe-icons a:hover i::after{ transform: translate(0,0) rotate(0deg); }
+.wipe-icons a:hover i{ color: var(--ink); border-color: transparent; }
+ 
+/* Label under the icon — same reveal-on-hover behaviour as Rise Icons */
+.wipe-icons a span{
+  font-family: var(--f-mono);
+  font-size: .7rem;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(.3rem);
+  transition: opacity .25s ease, transform .25s ease;
+  position: relative;
+}
+.wipe-icons a span::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -.25rem;
+  height: 1px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transition: transform .3s ease;
+}
+.wipe-icons a:hover span{ opacity: 1; transform: translateY(0); color: var(--paper); }
+.wipe-icons a:hover span::after{ transform: scaleX(1); }
+ 
+/* ==========================================================================
+   SPEC 08 — Rise Icons
+   ========================================================================== */
+
+.rise-icons{
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+.rise-icons a{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  padding-top: .5rem;
+}
+.rise-icons a i{
+  width: 3rem; height: 3rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 1.05rem;
+  color: var(--muted);
+  transition: color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.rise-icons a:hover i{ color: var(--amber); border-color: var(--amber-dim); transform: translateY(-.2rem); }
+ 
+.rise-icons a span{
+  font-family: var(--f-mono);
+  font-size: .7rem;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(.3rem);
+  transition: opacity .25s ease, transform .25s ease;
+  position: relative;
+}
+.rise-icons a span::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -.25rem;
+  height: 1px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transition: transform .3s ease;
+}
+.rise-icons a:hover span{ opacity: 1; transform: translateY(0); color: var(--paper); }
+.rise-icons a:hover span::after{ transform: scaleX(1); }
+ 
+/* ==========================================================================
+   FOOTER / COLOPHON
+   ========================================================================== */
+
+.colophon{
+  padding: 2.5rem 0 3.5rem;
+  color: var(--muted);
+  font-family: var(--f-mono);
+  font-size: .78rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE — rail collapses to a bottom toggle bar on small screens
+   ========================================================================== */
+
+@media (max-width: 860px){
+  .index-rail{
+    top: auto; bottom: 0; left: 0;
+    width: 100vw; height: auto;
+    flex-direction: row;
+    align-items: center;
+    padding: .75rem 1rem;
+    border-right: none;
+    border-top: 1px solid var(--line);
+    z-index: 200;
+  }
+  .index-rail__mark{ margin: 0; flex: 1; }
+  .index-rail__list{
+    position: fixed;
+    left: 0; right: 0; bottom: 4.2rem;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+    flex-direction: column;
+    display: none;
+  }
+  .index-rail__list.is-open{ display: flex; }
+  .index-rail__toggle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .3rem;
+    width: 2.4rem; height: 2.4rem;
+    background: var(--panel-2);
+    border: none;
+    border-radius: 50%;
+    align-items: center;
+    cursor: pointer;
+  }
+  .index-rail__toggle span{
+    width: 1.1rem; height: 2px;
+    background: var(--paper);
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .index-rail__toggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+  .index-rail__toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+  .index-rail__toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+  .catalog{ margin-left: 0; padding: 0 1.25rem 5rem; }
+  .cover{ padding: 3rem 0 2.5rem; }
+}
+
+@media (max-width: 480px){
+  .specimen__frame{ padding: 1.5rem; }
+  .specimen__label{ gap: .85rem; }
+}

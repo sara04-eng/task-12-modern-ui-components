@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Modern Web Components</title>
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="index-rail" id="indexRail" aria-label="Specimen index">
+    <div class="index-rail__mark">
+      <span class="index-rail__mark-dot"></span>
+      <span class="index-rail__mark-text">UI Components<em>.</em></span>
+    </div>
+    <ol class="index-rail__list">
+      <li><a href="#spec-01" data-spec="01"><span class="index-rail__num">01</span><span class="index-rail__label">Bar Navigation</span></a></li>
+      <li><a href="#spec-02" data-spec="02"><span class="index-rail__num">02</span><span class="index-rail__label">Side Navigation</span></a></li>
+      <li><a href="#spec-03" data-spec="03"><span class="index-rail__num">03</span><span class="index-rail__label">Glass Navigation</span></a></li>
+      <li><a href="#spec-04" data-spec="04"><span class="index-rail__num">04</span><span class="index-rail__label">Gradient Cards</span></a></li>
+      <li><a href="#spec-05" data-spec="05"><span class="index-rail__num">05</span><span class="index-rail__label">Hover Lift Cards</span></a></li>
+      <li><a href="#spec-06" data-spec="06"><span class="index-rail__num">06</span><span class="index-rail__label">Reveal Cards</span></a></li>
+      <li><a href="#spec-07" data-spec="07"><span class="index-rail__num">07</span><span class="index-rail__label">Social Wipe Icons</span></a></li>
+      <li><a href="#spec-08" data-spec="08"><span class="index-rail__num">08</span><span class="index-rail__label">Social Rise Icons</span></a></li>
+    </ol>
+    <button class="index-rail__toggle" id="railToggle" aria-label="Toggle specimen index" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="catalog">
+<!-- ============================================================
+     HERO SECTION
+============================================================= -->
+<header class="cover">
+    <p class="cover__eyebrow">
+        Web Development Task 12
+    </p>
+
+    <h1 class="cover__title">
+        Modern UI<br><em>Components</em>
+    </h1>
+
+    <p class="cover__intro">
+        A collection of responsive navigation bars, gradient borders,
+        interactive card hover effects, and animated social media icons
+        built using HTML, CSS, and JavaScript.
+    </p>
+
+    <div class="cover__meta">
+        <span>Responsive Design</span>
+        <span>HTML • CSS • JavaScript</span>
+        <span>2026</span>
+    </div>
+</header>
+    <!-- ============================================================
+         HEADER SECTION — three navbar specimens
+    ============================================================= -->
+
+    <section class="specimen" id="spec-01">
+      <div class="specimen__label">
+        <span class="specimen__num">01</span>
+        <div>
+          <h2 class="specimen__title">Navigation Shape 1</h2>
+          <p class="specimen__caption">A horizontal top bar with a pill indicator that glides beneath the active link.</p>
+        </div>
+      </div>
+      <div class="specimen__frame">
+        <nav class="demo-navA">
+          <a href="#" class="demo-navA__brand">SaraUI</a>
+          <button class="demo-navA__burger" id="navABurger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <ul class="demo-navA__links" id="navALinks">
+            <a href="#" class="is-active" data-navA aria-current="page">Studio</a>
+            <li><a href="#" data-navA>Work</a></li>
+            <li><a href="#" data-navA>Journal</a></li>
+            <li><a href="#" data-navA>Contact</a></li>
+          </ul>
+          <span class="demo-navA__pill" id="navAPill" aria-hidden="true"></span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- SPEC 02 — Vertical expanding icon rail -->
+    <section class="specimen" id="spec-02">
+      <div class="specimen__label">
+        <span class="specimen__num">02</span>
+        <div>
+          <h2 class="specimen__title">Navigation Shape 2</h2>
+          <p class="specimen__caption">A vertical icon rail that widens on hover to reveal labels, with a rotating brand mark.</p>
+        </div>
+      </div>
+      <div class="specimen__frame specimen__frame--tall">
+        <div class="demo-navB-stage">
+          <nav class="demo-navB">
+            <div class="demo-navB__mark"><i class="fa-solid fa-seedling"></i><span>Nova</span></div>
+            <ul class="demo-navB__list">
+              <li><a href="#"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+              <li><a href="#" class="is-active"><i class="fa-solid fa-compass"></i><span>Explore</span></a></li>
+              <li><a href="#"><i class="fa-solid fa-layer-group"></i><span>Projects</span></a></li>
+              <li><a href="#"><i class="fa-solid fa-message"></i><span>Messages</span></a></li>
+              <li><a href="#"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+            </ul>
+          </nav>
+          <p class="demo-navB-stage__hint">hover the rail →</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEC 03 — Floating glass split navbar with scroll shrink -->
+    <section class="specimen" id="spec-03">
+      <div class="specimen__label">
+        <span class="specimen__num">03</span>
+        <div>
+          <h2 class="specimen__title">Navigation Shape 3</h2>
+          <p class="specimen__caption">A glass pill bar, centred logo, links split left and right — shrinks as its stage scrolls.</p>
+        </div>
+      </div>
+      <div class="specimen__frame specimen__frame--tall">
+        <div class="demo-navC-stage" id="navCStage">
+          <nav class="demo-navC" id="navC">
+            <ul class="demo-navC__side">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+            <a href="#" class="demo-navC__mark">Pixel</a>
+            <ul class="demo-navC__side">
+              <li><a href="#">Components</a></li>
+              <li><a href="#" class="demo-navC__cta">Contact</a></li>
+            </ul>
+          </nav>
+          <p class="demo-navC-stage__hint">scroll this frame ↓</p>
+          <div class="demo-navC-stage__spacer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BODY SECTION
+    ============================================================= -->
+
+    <!-- SPEC 04 — Gradient border frames -->
+    <section class="specimen" id="spec-04">
+      <div class="specimen__label">
+        <span class="specimen__num">04</span>
+        <div>
+          <h2 class="specimen__title">Gradient Frames</h2>
+          <p class="specimen__caption">Rounded panels edged in a slow-turning conic gradient, held inside a transparent border.</p>
+        </div>
+      </div>
+      <div class="specimen__frame">
+        <div class="gradient-frames">
+          <article class="gframe">
+            <div class="gframe__inner">
+              <i class="fa-solid fa-compass-drafting"></i>
+              <h3>Drafting</h3>
+              <p>Early structure, sketched loose enough to still change its mind.</p>
+            </div>
+          </article>
+          <article class="gframe gframe--teal">
+            <div class="gframe__inner">
+              <i class="fa-solid fa-layer-group"></i>
+              <h3>Layering</h3>
+              <p>Stacking detail in passes, coarse to fine, until it holds.</p>
+            </div>
+          </article>
+          <article class="gframe">
+            <div class="gframe__inner">
+              <i class="fa-solid fa-stamp"></i>
+              <h3>Finishing</h3>
+              <p>The last pass — spacing, weight, the small corrections.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEC 05 — Lift & glow hover cards -->
+    <section class="specimen" id="spec-05">
+      <div class="specimen__label">
+        <span class="specimen__num">05</span>
+        <div>
+          <h2 class="specimen__title">Card Hover Effect 1</h2>
+          <p class="specimen__caption">Cards lift on hover while a soft light follows the cursor beneath the surface.</p>
+        </div>
+      </div>
+      <div class="specimen__frame">
+        <div class="glow-cards">
+          <article class="glow-card" data-glow>
+            <span class="glow-card__spot"></span>
+            <span class="glow-card__index">A</span>
+            <h3>Portfolio</h3>
+
+<p>
+Showcasing creative front-end projects with modern UI design.
+</p>
+            <span class="glow-card__go">Read <i class="fa-solid fa-arrow-right"></i></span>
+          </article>
+          <article class="glow-card" data-glow>
+            <span class="glow-card__spot"></span>
+            <span class="glow-card__index">B</span>
+           <h3>UI Design</h3>
+
+<p>
+Creative interfaces focused on usability, responsiveness, and aesthetics.
+</p>
+            <span class="glow-card__go">Read <i class="fa-solid fa-arrow-right"></i></span>
+          </article>
+          <article class="glow-card" data-glow>
+            <span class="glow-card__spot"></span>
+            <span class="glow-card__index">C</span>
+            <h3>Process Log</h3>
+            <p>Decisions, revisions, and the reasoning that connects them.</p>
+            <span class="glow-card__go">Read <i class="fa-solid fa-arrow-right"></i></span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEC 06 — Reveal panel hover cards -->
+    <section class="specimen" id="spec-06">
+      <div class="specimen__label">
+        <span class="specimen__num">06</span>
+        <div>
+          <h2 class="specimen__title">Card Hover Effect 2</h2>
+          <p class="specimen__caption">A tone panel slides up from the base of the card to surface its description.</p>
+        </div>
+      </div>
+      <div class="specimen__frame">
+        <div class="reveal-cards">
+          <article class="reveal-card">
+            <div class="reveal-card__top"><i class="fa-solid fa-mountain-sun"></i></div>
+            <div class="reveal-card__panel">
+              <h3>Frontend</h3>
+              <p>Contour, elevation, and how light falls across a slope.</p>
+            </div>
+          </article>
+          <article class="reveal-card">
+            <div class="reveal-card__top"><i class="fa-solid fa-water"></i></div>
+            <div class="reveal-card__panel">
+              <h3>Responsive</h3>
+              <p>Movement studies — how water pulls and settles.</p>
+            </div>
+          </article>
+          <article class="reveal-card">
+            <div class="reveal-card__top"><i class="fa-solid fa-tree"></i></div>
+            <div class="reveal-card__panel">
+              <h3>Creative UI</h3>
+              <p>Density, shade, and the gaps that let light through.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER SECTION — two social icon specimens
+    ============================================================= -->
+    <footer class="specimen specimen--footer" id="footer">
+
+      <!-- SPEC 07 — Diagonal wipe icons -->
+      <section class="specimen" id="spec-07">
+        <div class="specimen__label">
+          <span class="specimen__num">07</span>
+          <div>
+           <h2 class="specimen__title">Creative Social Media Icons</h2>
+
+<p class="specimen__caption">
+Interactive social media icons with a smooth diagonal wipe hover effect.
+</p>
+          </div>
+        </div>
+        <div class="specimen__frame">
+          <ul class="wipe-icons">
+    <li>
+      <a href="https://www.instagram.com/username" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+            <span>Instagram</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="https://x.com/username" target="_blank">
+            <i class="fa-brands fa-x-twitter"></i>
+            <span>X</span>
+        </a>
+    </li>
+
+    <li>
+      <a href="https://dribbble.com/username" target="_blank">
+            <i class="fa-brands fa-dribbble"></i>
+            <span>Dribbble</span>
+        </a>
+    </li>
+
+    <li>
+       <a href="https://github.com/username" target="_blank">
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub</span>
+        </a>
+    </li>
+
+    <li>
+       <a href="https://www.linkedin.com/in/username" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+        </a>
+    </li>
+</ul>
+        </div>
+      </section>
+
+      <!-- SPEC 08 — Rising tooltip icons -->
+      <section class="specimen" id="spec-08">
+        <div class="specimen__label">
+          <span class="specimen__num">08</span>
+          <div>
+            <h2 class="specimen__title">Social Media Icons 2</h2>
+
+<p class="specimen__caption">
+Animated social media icons with floating labels and hover effects.
+</p>
+          </div>
+        </div>
+        <div class="specimen__frame">
+          <ul class="rise-icons">
+            <li><a href="#"><i class="fa-brands fa-behance"></i><span>Behance</span></a></li>
+            <li><a href="#"><i class="fa-brands fa-pinterest-p"></i><span>Pinterest</span></a></li>
+            <li><a href="#"><i class="fa-brands fa-youtube"></i><span>YouTube</span></a></li>
+            <li><a href="#"><i class="fa-brands fa-tiktok"></i><span>TikTok</span></a></li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="colophon">
+        <p>Task 12 • Modern UI Components
+Created using HTML, CSS & JavaScript.</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
